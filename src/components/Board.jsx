@@ -8,7 +8,7 @@ function Board({ playerID, onGameOver }) {
   const [results, setResults] = useState([]);
   const makeGuess = async () => {
     try {
-      const res = await axios.post("http://localhost:4000/game/guess", {
+      const res = await axios.post("https://lettermaze-server.onrender.com/guess", {
         playerID,
         guess
       });

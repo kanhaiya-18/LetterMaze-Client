@@ -5,7 +5,7 @@ function StartGame({ onStart }) {
     const [playerID, setPlayerID] = useState("");
     const startGameHandler = async() => {
         try{
-            const res = await axios.post("http://localhost:4000/game/new",{ playerID : playerID});
+            const res = await axios.post("https://lettermaze-server.onrender.com/new",{ playerID : playerID});
             console.log(res.data);
             onStart(playerID); //send playerID back to parent
         }
