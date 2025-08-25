@@ -6,6 +6,7 @@ function Board({ playerID, onGameOver }) {
   const [guess, setGuess] = useState("");
   const [tries, setTries] = useState(0);
   const [results, setResults] = useState([]);
+  const [msg, setMsg] = useState("");
   const makeGuess = async () => {
     try {
       const res = await axios.post("https://lettermaze-server.onrender.com/game/guess", {
@@ -20,6 +21,7 @@ function Board({ playerID, onGameOver }) {
         setTimeout(() => onGameOver(), 2000);
 
       }
+      setMsg(res.data.message);
       setTries((prev) => prev + 1);
       setResults((prev) => [...prev, res.data.result]); // add row
       // setTries(res.data.tries);
@@ -39,9 +41,9 @@ function Board({ playerID, onGameOver }) {
   };
   if(tries === 6)
       {
-        toast.error("you are out of tries ",{
+        toast.error(msg || "you are out of tries ",{
           position: "top-center",
-          autoClose: 2000
+          autoClose: 4000
         });
         setTimeout(() => onGameOver(), 2000);
       }
